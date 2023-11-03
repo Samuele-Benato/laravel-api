@@ -30,7 +30,6 @@ class ProjectSeeder extends Seeder
             $project->title = $faker->firstNameMale();
             $project->link = $faker->url;
             $project->description = $faker->paragraph(2);
-            $project->image = "https://picsum.photos/300/200";
             $project->save();
         }
     }
