@@ -15,7 +15,7 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::whit('type:id,label', 'technologies:id,label')
+        $projects = Project::with('type:id,label', 'technologies:id,label')
             ->orderBy('id', 'desc')
             ->paginate(5);
         // ->where('published', 1)

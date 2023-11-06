@@ -98,16 +98,16 @@ class ProjectController extends Controller
     public function update(Request $request, Project $project)
     {
         $data = $this->validation($request->all());
-        $project->update($data);
+
 
         if ($request->hasFile('image')) {
             if ($project->image) {
                 Storage::delete($project->image);
             }
-            $image_path = Storage::put('uploads/projects/image', $data['image']);
-            $project->image = $image_path;
+            $project->image = Storage::put('uploads/projects/image', $data['image']);
+            $data['image'] = $project->image;
         }
-
+        $project->update($data);
         if (Arr::exists($data, "technologies"))
             $project->technologies()->sync($data["technologies"]);
         else
