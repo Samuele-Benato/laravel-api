@@ -15,9 +15,10 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::paginate(5);
+        $projects = Project::whit('type:id,label', 'technologies:id,label')
+            ->orderBy('id', 'desc')
+            ->paginate(5);
         // ->where('published', 1)
-        // ->whit('types:id,label', 'technologies:id,label')
         return response()->json($projects);
     }
     /**
