@@ -29,7 +29,7 @@ class ProjectController extends Controller
      */
     public function show($id)
     {
-        $project = Project::with('technologies:id,label', 'type:id,label')
+        $project = Project::with('type:id,label', 'technologies:id,label')
             ->where('id', $id)
             ->first();
         return response()->json($project);
