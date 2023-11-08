@@ -16,9 +16,9 @@ class TypeController extends Controller
      */
     public function show($id)
     {
-        $type = Type::orderBy('id', 'desc')
+        $type = Type::with('projects')
             ->where('id', $id)
-            ->paginate(5);
+            ->first();
 
         if (!$type)
             abort(404, "Tipo non trovato");
