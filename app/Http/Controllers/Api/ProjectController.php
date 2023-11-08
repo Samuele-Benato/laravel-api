@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Project;
+use App\Models\Type;
 use Illuminate\Http\Request;
 
 class ProjectController extends Controller
@@ -41,10 +42,18 @@ class ProjectController extends Controller
 
     public function projectByType($type_id)
     {
+        $type = Type::find($type_id);
+
+        if (!$type)
+            abort(404, "Tipo non trovato");
+
         $projects = Project::with('type:id,label', 'technologies:id,label')
             ->orderBy('id', 'desc')
             ->where('type_id', $type_id)
             ->paginate(5);
-        return response()->json($projects);
+
+        return response()->json(
+            $projects
+        );
     }
 }
