@@ -20,3 +20,4 @@ use Illuminate\Support\Facades\Route;
 // });
 
 Route::apiResource('projects', ProjectController::class)->only(["index", "show"]);
+Route::get('/project-by-type/{type_id}', [ProjectController::class, 'projectByType']);
